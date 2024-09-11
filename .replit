@@ -1,0 +1,27 @@
+   run = ["python", "manage.py", "runserver", "0.0.0.0:80"]
+entrypoint = "manage.py"
+modules = ["python-3.10:v18-20230807-322e88b"]
+
+hidden = [".pythonlibs"]
+
+[nix]
+channel = "stable-24_05"
+
+[unitTest]
+language = "python3"
+
+[deployment]
+run = ["python", "manage.py", "runserver", "0.0.0.0:80"]
+deploymentTarget = "gce"
+
+[[ports]]
+localPort = 80
+externalPort = 3000
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000

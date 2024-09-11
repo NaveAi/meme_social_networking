@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}יצירת מם חדש{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="text-center mb-4">יצירת מם חדש</h1>
+        <form method="post" enctype="multipart/form-data" class="card p-4">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name != 'title' and field.name != 'image' %}  <!-- השמט תוויות אחרות -->
+                    <div class="mb-3">
+                        {{ field }}  <!-- הצג את השדה ללא תווית -->
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="mb-3">
+                <div class="border p-2">  <!-- הוסף קווקווים סביב שדה הקלט -->
+                    <input type="text" name="title" id="id_title" class="form-control" placeholder="כותרת המם" required>  <!-- שדה הכותרת -->
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label visually-hidden">בחר תמונה:</label>  <!-- תווית מוסתרת עבור input type=file -->
+                <div class="border p-2">  <!-- הוסף קווקווים סביב שדה הקלט -->
+                    <input type="file" name="image" id="id_image" class="form-control" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">צור מם</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

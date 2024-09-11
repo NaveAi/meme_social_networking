@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}הפרופיל של {{ profile_user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">הפרופיל של {{ profile_user.username }}</h1>
+    
+    {% if not is_own_profile %}
+        {% if is_following %}
+            <a href="{% url 'follow_user' profile_user.username %}" class="btn btn-secondary mb-3">הפסק לעקוב</a>
+        {% else %}
+            <a href="{% url 'follow_user' profile_user.username %}" class="btn btn-primary mb-3">עקוב</a>
+        {% endif %}
+    {% endif %}
+    
+    <p>עוקבים: {{ followers_count }} | עוקב אחרי: {{ following_count }}</p>
+    
+    {% if is_own_profile %}
+        <div class="text-center mb-4">
+            <a href="{% url 'create_meme' %}" class="btn btn-success">צור מם חדש</a>
+        </div>
+    {% endif %}
+
+    <h2 class="mb-3">הממים של {{ profile_user.username }}:</h2>
+    <div class="row">
+        {% for meme in memes %}
+            <div class="col-md-4 mb-4">
+                {% include "meme_card.html" with meme=meme %}
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">אין ממים להצגה.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

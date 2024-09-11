@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ meme.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card" data-meme-id="{{ meme.id }}">
+        <img src="{{ meme.image.url }}" class="card-img-top meme-detail-img" alt="{{ meme.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ meme.title }}</h5>
+            <p class="card-text">נוצר על ידי: <a href="{% url 'user_profile' meme.creator.username %}">{{ meme.creator.username }}</a></p>
+            <p class="card-text">
+                <small class="text-muted">
+                    <i class="bi bi-chat-fill"></i> {{ meme.comments.count }}
+                    <i class="bi bi-arrow-repeat"></i> <span class="retweet-count">{{ meme.retweets.count }}</span>
+                </small>
+            </p>
+        </div>
+        <div class="card-footer">
+            <div class="emoji-reactions">
+                {% for emoji, count in meme.emoji_counts.items %}
+                    <span class="emoji-display" data-emoji="{{ emoji }}">{{ emoji }} {{ count }}</span>
+                {% endfor %}
+            </div>
+            <div class="emoji-selector mt-2">
+                <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😀">😀</button>
+                <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😂">😂</button>
+                <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😍">😍</button>
+                <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😮">😮</button>
+                <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😢">😢</button>
+            </div>
+            {% if user.is_authenticated and user != meme.creator %}
+                <button class="btn btn-sm btn-outline-info retweet-btn mt-2" data-meme-id="{{ meme.id }}">
+                    {% if user in meme.retweets.all %}
+                        בטל ריטווט
+                    {% else %}
+                        ריטווט
+                    {% endif %}
+                </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <h3 class="mt-4">תגובות:</h3>
+    {% for comment in comments %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted"><a href="{% url 'user_profile' comment.user.username %}">{{ comment.user.username }}</a></h6>
+                <p class="card-text">{{ comment.content }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>אין תגובות עדיין.</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <h4 class="mt-4">הוסף תגובה:</h4>
+        <form method="post" action="{% url 'add_comment' meme.id %}">
+            {% csrf_token %}
+            {{ comment_form.content }}  <!-- השאר את השורה הזו -->
+            <button type="submit" class="btn btn-primary">שלח תגובה</button>
+        </form>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const memeId = document.querySelector('.card').dataset.memeId;
+
+        document.querySelectorAll('.emoji-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();  // הוסף שורה זו כדי למנוע רענון הדף
+                const emoji = this.dataset.emoji;
+                fetch(`/meme/${memeId}/emoji/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({emoji: emoji})
+                }).then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+
+    const retweetBtn = document.querySelector('.retweet-btn');
+    if (retweetBtn) {
+        retweetBtn.addEventListener('click', function() {
+            fetch(`/meme/${memeId}/retweet/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    if (data.action === 'added') {
+                        this.textContent = 'בטל ריטווט';
+                    } else {
+                        this.textContent = 'ריטווט';
+                    }
+                    const retweetCountElement = document.querySelector('.retweet-count');
+                    if (retweetCountElement) {
+                        retweetCountElement.textContent = data.count;
+                    }
+                }
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

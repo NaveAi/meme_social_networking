@@ -1,0 +1,41 @@
+<div class="card h-100" data-meme-id="{{ meme.id }}">
+    <a href="{% url 'meme_detail' meme.id %}">
+        <img src="{{ meme.image.url }}" class="card-img-top" alt="{{ meme.title }}">
+    </a>
+    <div class="card-body d-flex flex-column">
+        <h5 class="card-title"><a href="{% url 'meme_detail' meme.id %}">{{ meme.title }}</a></h5>
+        <p class="card-text">נוצר על ידי: <a href="{% url 'user_profile' meme.creator.username %}">{{ meme.creator.username }}</a></p>
+        {% if is_retweet %}
+            <p class="card-text"><small class="text-muted">ריטווט על ידי {{ profile_user.username }}</small></p>
+        {% endif %}
+        <p class="card-text mt-auto">
+            <small class="text-muted">
+                <i class="bi bi-chat-fill"></i> {{ meme.comments.count }}
+                <i class="bi bi-arrow-repeat"></i> <span class="retweet-count">{{ meme.retweets.count }}</span>
+            </small>
+        </p>
+    </div>
+    <div class="card-footer">
+        <div class="emoji-reactions">
+            {% for emoji, count in meme.emoji_counts.items %}
+                <span class="emoji-display" data-emoji="{{ emoji }}">{{ emoji }} {{ count }}</span>
+            {% endfor %}
+        </div>
+        <div class="emoji-selector mt-2">
+            <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😀">😀</button>
+            <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😂">😂</button>
+            <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😍">😍</button>
+            <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😮">😮</button>
+            <button class="btn btn-sm btn-outline-primary emoji-btn" data-emoji="😢">😢</button>
+        </div>
+        {% if user.is_authenticated and user != meme.creator %}
+            <button class="btn btn-sm btn-outline-info retweet-btn mt-2" data-meme-id="{{ meme.id }}">
+                {% if user in meme.retweets.all %}
+                    בטל ריטווט
+                {% else %}
+                    ריטווט
+                {% endif %}
+            </button>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}דף הבית - אפליקציית ממים{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="recent-tab" data-bs-toggle="tab" data-bs-target="#recent" type="button" role="tab" aria-controls="recent" aria-selected="true">ממים אחרונים</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="followed-tab" data-bs-toggle="tab" data-bs-target="#followed" type="button" role="tab" aria-controls="followed" aria-selected="false">במעקב</button>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
+        <div class="row">
+            {% for meme in recent_memes %}
+                <div class="col-md-4 mb-4">
+                    {% include "meme_card.html" with meme=meme user_emoji=meme.user_emoji %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="tab-pane fade" id="followed" role="tabpanel" aria-labelledby="followed-tab">
+        <div class="row">
+            {% for meme in followed_memes %}
+                <div class="col-md-4 mb-4">
+                    {% include "meme_card.html" with meme=meme user_emoji=meme.user_emoji %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
