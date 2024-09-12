@@ -5,15 +5,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'your-secret-key-here'
-DEBUG = True
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 # ... existing code ...
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '11ec56d9-6098-4cdf-a77e-7bd53ae45d3f-00-1nku46o0soqjg.sisko.replit.dev',
-    '*',  # לא מומלץ בסביבות ייצור, אבל יכול לעזור לבדוק אם הבעיה נובעת מהגדרות
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -72,8 +67,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+database_url = os.environ.get("DATABASE_URL")
 
-DATABASES["default"] = dj_database_url.parse("postgresql://meme_social_net_storage_user:qDk7CmDU08pTWVd42UCEaR3pB9zLA8iM@dpg-crh8f6l6l47c73c42da0-a.oregon-postgres.render.com/meme_social_net_storage")
+DATABASES["default"] = dj_database_url.parse(database_url)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
