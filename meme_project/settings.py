@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -70,6 +72,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASES["default"] = dj_database_url.parse("postgresql://meme_social_net_storage_user:qDk7CmDU08pTWVd42UCEaR3pB9zLA8iM@dpg-crh8f6l6l47c73c42da0-a.oregon-postgres.render.com/meme_social_net_storage")
 
 AUTH_PASSWORD_VALIDATORS = [
     {
