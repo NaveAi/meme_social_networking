@@ -5,5 +5,5 @@ from django.core.management import call_command
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meme_project.settings')
 application = get_wsgi_application()
 
-if os.getenv('MIGRATE_ON_START', 'false').lower() == 'true':
+if os.getenv('MIGRATE_ON_START_INPUT', 'false').lower() == 'true':
     call_command('migrate')
