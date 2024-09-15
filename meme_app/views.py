@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Meme, Comment, Profile, MemeEmoji, Retweet  # הוספנו Retweet
+from .models import Meme, Comment, Profile, MemeEmoji, Retweet, SystemMessage# הוספנו Retweet
 from .serializers import MemeSerializer, CommentSerializer
 from .forms import CommentForm, MemeForm
 import json
@@ -16,6 +16,8 @@ from django.db.models import Count
 
 def home_view(request):
     memes = Meme.objects.all().order_by('-created_at')[:10]
+    system_messages = SystemMessage.objects.all()
+
     for meme in memes:
         meme.emoji_counts = dict(
             meme.emoji_reactions.values('emoji').annotate(
@@ -37,7 +39,8 @@ def home_view(request):
             meme.user_emoji = user_emoji.emoji if user_emoji else None
     return render(request, 'home.html', {
         'recent_memes': memes,
-        'followed_memes': followed_memes
+        'followed_memes': followed_memes,
+        'system_messages': system_messages
     })
 
 

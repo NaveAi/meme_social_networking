@@ -14,6 +14,21 @@
             background-color: #f0f2f5;
             padding-bottom: 60px; /* מרווח לפוטר */
         }
+        #system-message-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 300px;
+            height: 300px;
+            background-color: #f8f9fa; /* צבע רקע */
+            border: 1px solid #dee2e6; /* גבול */
+            border-radius: 5px; /* פינות מעוגלות */
+            padding: 15px; /* רווח פנימי */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* צל */
+            display: none; /* מתחילים בסתרה */
+        }
         .navbar {
             background-color: #4267B2;
         }
@@ -81,7 +96,12 @@
             .emoji-btn {
                 font-size: 1.2rem;
             }
-        }
+            #system-message-popup {
+            width: 80%;
+            height: auto;
+            max-height: 80%;
+            padding: 10px;
+        }}
         .meme-detail-img {
             width: auto;
             max-width: 100%;
@@ -136,9 +156,7 @@
             e.preventDefault();
         }
     });
-    </script>
-    <!-- בסוף הקובץ, לפני תג ה-</body> -->
-    <script>
+
     document.addEventListener('DOMContentLoaded', function() {
         function getCookie(name) {
             let cookieValue = null;
@@ -153,6 +171,16 @@
                 }
             }
             return cookieValue;
+        }
+
+        // בדוק אם יש אלמנט עם הפעולה המתאימה לפני הוספת מאזין
+        const logoutForm = document.querySelector('form[action="{% url 'logout' %}"]');
+        if (logoutForm) {
+            logoutForm.addEventListener('submit', function(e) {
+                if (!confirm('האם אתה בטוח שברצונך להתנתק?')) {
+                    e.preventDefault();
+                }
+            });
         }
 
         const csrftoken = getCookie('csrftoken');

@@ -12,6 +12,14 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+class SystemMessage(models.Model):
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
+
+
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:

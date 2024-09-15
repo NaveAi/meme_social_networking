@@ -3,6 +3,16 @@
 {% block title %}דף הבית - אפליקציית ממים{% endblock %}
 
 {% block content %}
+<div class="container">
+    {% if system_messages %}
+        <div class="alert alert-info" id="system-message-popup" style="display: block;">
+            <ul>
+                {% for message in system_messages %}
+                    <li>{{ message.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="recent-tab" data-bs-toggle="tab" data-bs-target="#recent" type="button" role="tab" aria-controls="recent" aria-selected="true">ממים אחרונים</button>
@@ -31,4 +41,16 @@
         </div>
     </div>
 </div>
+<script>
+    // הצגת הודעת המערכת למשך 5 שניות ואז הסתרה
+    var popup = document.getElementById('system-message-popup');
+    if (popup) {
+    popup.style.display = 'block'; // הצג את הפופאפ
+
+    // הסתרת הפופאפ לאחר 3 שניות
+    setTimeout(function() {
+        popup.style.display = 'none'; // הסתר את הפופאפ
+    }, 3000); // 3000 מילישניות = 3 שניות
+}
+</script>
 {% endblock %}
