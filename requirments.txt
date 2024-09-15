@@ -5,5 +5,5 @@ dj_database_url==2.2.0
 psycopg2==2.9.9
 gunicorn==23.0.0
 whitenoise==6.7.0
-django-storages==1.35.19
+django-storages==1.14.4
 boto3==1.35.19
