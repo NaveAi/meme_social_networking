@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "meme-social-db",
+  "private_key_id": "daccf4420e274af0dfbeee10a45f68de21d43116",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDqHfOTNnLPbfsI\n7cwUDAKZuRAw/j8+J6QMI35HGLgQmYdwatpatqu6YLmpFSdSB/lXjffyvlcR543f\nhilRayfLLOLjYvpAnXA5aEHLWIbykfBGg+lEbCNCEuqEJWQnk050eigvJoKZ1yT1\nuDrQL5DqlELejAlhrceh5ARHvRZhwWkUlJPH4ZwVCT8DlJoHT051w+fEJw9VB4JY\nnxIJ5ZXAgX0Xe6yyqYnQ06OmFbyYzOAq2hRw8uwJmMqDHHCEpiqcTEC3cIA2wrBL\nHAc0KbKW+a/ja1poTJTPPAKpzGM8iEOBO2bqensqGwEerH6g5Q3FTqUOUXIQU+ng\n0AjPaBhhAgMBAAECggEAAhdxaSPH482GPB6vv5AZ59is6dsjooEFKKyagLUaU9+j\nQ6BYwg22vAwILJgJSWTT1/HnQK5tpbXNYS1YKieMa/bDMifct34Qlhq118S7M+iU\n3nRoPZm/uOPlX3fcDLR2s3ix6jXsXcZ7yIw0Tk7WexoG/OkAXnSIf4xDc4afcBEf\naNru4KzPIgYO7YEaMtmW6Oyb2zvaCRQ0LRdpHTxGDR8P4t2UdvyZ0J/F+FF6NCgo\nKkXSXPVrEpz3nK00HA6v+k70ICijTu9sHZ5eP3YT6aEDm42NDWwXl4g1QNbNy/XI\nlfaDgtSXBJBGYXVTccI+lxJ92mIHn4qSeperWhc0PwKBgQD2P8zRzmBemysddPlv\n0VEiPXJWrK8kpiIK/K8H7SK9CQiKCPjLaswAbve7S2BzlmrGiUWTqlSf72H0f0G7\njDSv77ocFT9g3zeGsjU4erkyMmbNJk8Avpd6QUXaMMadl/78L3avuk5Yt1MPreER\n7hqm5Bodw7YKSNU65K340VN2GwKBgQDzYysgXqSFeVjL1PzMOgVGAr/YbfMZR2LX\nM+SU3rkaIQPEheQFGs06JQuGX8Jkfw46rExM11QsK6+h6+Mbmy7JKMZr2nrPg9Jo\nwnIf59zFmpqnBu8M8LHRe3d0T+XLbhDNAUYl4FVNAvChUzDnvhN8Yl8w/iR5rLz6\n/dEy24PDMwKBgQDm7S/TtTj0n4lQR4k/zkjK1lrqY2if8thL+2jdAwonwlfqsr02\nbgG/ilDxqJ9b5jxd0Q+ZigtwLNpsogZvre0e7K5YdaiI3OvCek6kl5ojM9bqHjnK\nVfHR6XJrSoCH+6lYr94ar5mXYtwXARXnbaY6ygCf1xBZFrI4V4m6o/sj7wKBgEC6\nDd0U7mIEzIWgxf42K/LbhlOzoeQGJRYgWdjxhn6ZaxwXk3V8FDozYeZBjzwUwh7+\ndWg2F8+LarEAP6y2z3F145cJSoHnh8yOcbVkf0UaAakL4gUp+dBBKpqHKRC528P5\nY8Ns7qKFdqMgsa/fz+TTcIdh/ydQtg119O22jUsbAoGBAMrET134kj1nz77CrwEU\n2aYaUKAEyZScZiuJgR4AJzYU2Z8+6A02HtmsB7DOLp7E40oNUNokhSS6Q13ESH82\nMkFmcArJlpWY0Ct9TB2kTOdKwMPBO0Q4g/p9EO6raW8DXuZEUQlbtLGjXut02EKb\nniEm8nWRq/RNlzyuIcpTFabW\n-----END PRIVATE KEY-----\n",
+  "client_email": "meme-social-db@meme-social-db.iam.gserviceaccount.com",
+  "client_id": "111911129071651532956",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meme-social-db%40meme-social-db.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
