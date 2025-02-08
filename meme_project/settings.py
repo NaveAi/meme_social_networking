@@ -66,10 +66,15 @@ WSGI_APPLICATION = 'meme_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'meme-social-net-storage',  # שם הדאטהבייס ב-Supabase
+        'USER': 'postgres.txcalgiobzdqpxxpabob',  # שם המשתמש ב-Supabase
+        'PASSWORD': 'database_memes',  # הסיסמה שקיבלת
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',  # כתובת מסד הנתונים
+        'PORT': '5432',  # הפורט של PostgreSQL
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
